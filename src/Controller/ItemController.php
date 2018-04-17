@@ -9,8 +9,14 @@
 
 namespace Controller;
 
+use Form\Element\Email;
+use Form\Element\Submit;
+use Form\Element\Text;
+use Form\Form;
 use Model\Item;
 use Model\ItemManager;
+use Validator\NotEmpty;
+use Validator\StringLength;
 
 /**
  * Class ItemController
@@ -67,8 +73,33 @@ class ItemController extends AbstractController
      */
     public function add()
     {
-        // TODO : add a new item
-        return $this->twig->render('Item/add.html.twig');
+        $errors = [];
+
+        $text = new Text('txt_name');
+        $email = new Email('txt_email');
+        $button = new Submit('btn_submit');
+
+        $form = new Form();
+        $form->addElement($text);
+        $form->addElement($email);
+        $form->addElement($button);
+        $form->setAction('/item/add');
+
+        // soumission du form
+        if (!empty($_POST)) {
+            $notEmpty = new NotEmpty($_POST['txt_name']);
+            $strLength = new StringLength($_POST['txt_name'], 10);
+            if (!$strLength->isValid() || !$notEmpty->isValid()) {
+                $errors[] = $notEmpty->getErrors();
+                $errors[] = $strLength->getErrors();
+            } else {
+                echo  'enregistrement en bdd';
+            }
+        }
+
+        return $this->twig->render('Item/add.html.twig',
+                                    ['form' => $form->render(),
+                                        'errors' => $errors]);
     }
 
     /**

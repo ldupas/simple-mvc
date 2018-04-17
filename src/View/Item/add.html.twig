@@ -2,5 +2,12 @@
 
 {% block content %}
     <h1>Add a new item</h1>
-    {% include 'Item/_form.html.twig' %}
+
+    {% for error in errors %}
+        {% for err in error %}
+        {{ err }}
+        {% endfor %}
+    {% endfor %}
+    {{ form | raw }}
+
 {% endblock %}
