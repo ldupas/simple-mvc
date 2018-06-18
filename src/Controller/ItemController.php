@@ -12,7 +12,9 @@ namespace Controller;
 use Form\Element\Email;
 use Form\Element\Submit;
 use Form\Element\Text;
+use Form\Element\Textarea;
 use Form\Form;
+use Message\Message;
 use Model\Item;
 use Model\ItemManager;
 use Validator\NotEmpty;
@@ -75,13 +77,20 @@ class ItemController extends AbstractController
     {
         $errors = [];
 
-        $text = new Text('txt_name');
-        $email = new Email('txt_email');
+        $name = new Text('name');
+        $email = new Email('email');
+        $description = new Textarea('description');
         $button = new Submit('btn_submit');
 
-        $form = new Form();
-        $form->addElement($text);
+        $message = new Message();
+        $message->setName('Nico');
+        $message->setEmail('nico@gmail.com');
+        $message->setDescription('une longue description');
+
+        $form = new Form($message);
+        $form->addElement($name);
         $form->addElement($email);
+        $form->addElement($description);
         $form->addElement($button);
         $form->setAction('/item/add');
 

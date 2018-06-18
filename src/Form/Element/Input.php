@@ -9,22 +9,12 @@
 namespace Form\Element;
 
 
-abstract class Input implements RenderInterface
+abstract class Input extends Element
 {
     /**
      * @var string
      */
     protected $type;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @return string
@@ -44,26 +34,11 @@ abstract class Input implements RenderInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     * @return Input
-     */
-    public function setName(string $name): Input
-    {
-        $this->name = $name;
-        return $this;
-    }
-
     public function render() : string
     {
-        return sprintf('<input type="%s" name="%s" />'."\n", $this->type, $this->name);
+        return sprintf('<input type="%s" name="%s" value="%s" />'."\n",
+                        $this->type,
+                        $this->name,
+                        $this->value);
     }
 }

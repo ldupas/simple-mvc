@@ -9,7 +9,10 @@
 namespace Form;
 
 
+use Form\Element\Element;
 use Form\Element\Input;
+use Form\Element\Submit;
+use Message\Message;
 
 class Form
 {
@@ -27,6 +30,37 @@ class Form
      * @var array
      */
     private $elements = [];
+
+    /**
+     * @var Message
+     */
+    private $message;
+
+    /**
+     * Form constructor.
+     */
+    public function __construct(Message $message)
+    {
+        $this->setMessage($message);
+    }
+
+    /**
+     * @return Message
+     */
+    public function getMessage(): Message
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param Message $message
+     * @return Form
+     */
+    public function setMessage(Message $message): Form
+    {
+        $this->message = $message;
+        return $this;
+    }
 
     /**
      * @return string
@@ -79,7 +113,7 @@ class Form
     public function setElements(array $elements): Form
     {
         foreach ($elements as $element) {
-            if (!$element instanceof Input) {
+            if (!$element instanceof Element) {
                 throw new \LogicException('type inattendu');
             }
         }
@@ -87,8 +121,17 @@ class Form
         return $this;
     }
 
-    public function addElement(Input $element) : Form
+    public function addElement(Element $element) : Form
     {
+        if (!$element instanceof Submit) {
+            $getter = 'get'.ucfirst($element->getName());
+            if (!method_exists($this->getMessage(), $getter)) {
+                throw new \LogicException('getter non trouvé : '.$getter);
+            }
+
+            $element->setValue($this->getMessage()->$getter());
+        }
+
         $this->elements[] = $element;
         return $this;
     }
@@ -102,6 +145,7 @@ class Form
                         $this->getMethod(),
                         $this->getAction());
 
+        /* @var $element Element */
         foreach ($this->getElements() as $element) {
             $str .= $element->render();
         }
