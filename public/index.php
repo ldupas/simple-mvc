@@ -14,7 +14,7 @@
 <body>
     <section>
         <h1>Bienvenue sur le Simple MVC</h1>
-        <a href="item.php">Voir les items</a>
+        <a href="../src/Controller/ItemController.php">Voir les items</a>
     </section>
 </body>
 </html>
