@@ -11,8 +11,8 @@
 </head>
 
 <?php
-// connection BDD (définir les constantes dans un fichier connec.php qui sera inclus)
-require '../app/connec.php';
+// connection BDD (définir les constantes dans un fichier app.php qui sera inclus)
+require '../app/db.php';
 $pdo = new \PDO(DSN, USER, PASS);
 
 // requete SQL 
