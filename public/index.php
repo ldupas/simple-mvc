@@ -21,10 +21,10 @@ $res = $pdo->query($query);
 $items = $res->fetchAll();
 ?>
 
-<!-- affichage des articles récupérés par la requête SQL -->
+<!-- affichage des items récupérés par la requête SQL -->
 <body>
     <section>
-        <h1>Les articles</h1>
+        <h1>Items</h1>
         <ul>
         <?php foreach ($items as $item) : ?>
             <li><?= $item['title'] ?></li>
