@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <h1>Detail</h1>
+    <div class="row">
+        {% for drink in drinks %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ drink.picture }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ drink.name }}</h5>
+                        <p class="card-text">{{ drink.description }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
