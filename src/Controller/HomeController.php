@@ -8,7 +8,10 @@
 
 namespace App\Controller;
 
+use App\Model\ApiBeersModel;
 use App\Model\CategoryManager;
+use App\Service\BeersTransformer;
+use Symfony\Component\HttpClient\HttpClient;
 
 class HomeController extends AbstractController
 {
@@ -29,5 +32,17 @@ class HomeController extends AbstractController
         return $this->twig->render('Home/index.html.twig', [
             "categories" => $categories,
         ]);
+    }
+
+    public function beers()
+    {
+        $beersApi = new ApiBeersModel();
+        $beers = $beersApi->getBeers();
+
+        $beersTransformer = new BeersTransformer();
+        $newBeers = $beersTransformer->transformBeers($beers);
+
+        header("Content-Type: application/json");
+        return json_encode($newBeers);
     }
 }
