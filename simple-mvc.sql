@@ -5,7 +5,8 @@ CREATE DATABASE mydrinks;
 CREATE TABLE mydrinks.category (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    image VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE mydrinks.drink (
@@ -17,11 +18,11 @@ CREATE TABLE mydrinks.drink (
     category_id INT NOT NULL
 );
 
-INSERT INTO mydrinks.category (id, name, description) VALUES
-    (1, "Beers", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-    (2, "Wines", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-    (3, "Softs", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-    (4, "Spirits", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+INSERT INTO mydrinks.category (id, name, description, image) VALUES
+    (1, "Beers", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "https://picsum.photos/200/200"),
+    (2, "Wines", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "https://picsum.photos/200/200"),
+    (3, "Softs", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "https://picsum.photos/200/200"),
+    (4, "Spirits", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "https://picsum.photos/200/200")
 ;
 
 INSERT INTO mydrinks.drink (name, alcohol_level, description, picture, category_id) VALUES

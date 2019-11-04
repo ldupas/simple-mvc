@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\DrinkManager;
+use App\Service\CategoryImageUploader;
 use App\Service\CategoryValidator;
 
 class CategoryController extends AbstractController
@@ -27,10 +28,12 @@ class CategoryController extends AbstractController
         $errors = [];
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $categoryValidator = new CategoryValidator();
-            $errors = $categoryValidator->validateCategory($_POST);
+            $errors = $categoryValidator->validateCategory($_POST, $_FILES);
             if (empty($errors)) {
+                $categoryUploader = new CategoryImageUploader();
+                $filename = $categoryUploader->uploadImage($_FILES["image"]);
                 $categoryManager = new CategoryManager();
-                $categoryManager->insert($_POST);
+                $categoryManager->insert($_POST, $filename);
                 header("Location:/");
             }
         }

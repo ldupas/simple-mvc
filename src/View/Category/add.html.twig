@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Create Category</h1>
     <div class="row">
-        <form method="POST" class="col-12">
+        <form method="POST" enctype="multipart/form-data" class="col-12">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control {{ errors.name is defined ? "is-invalid" }}" id="name" name="name">
@@ -16,6 +16,13 @@
                 <input type="text" class="form-control {{ errors.description is defined ? "is-invalid" }}" id="description" name="description">
                 <div class="invalid-feedback">
                     {{ errors.description is defined ? errors.description }}
+                </div>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input {{ errors.image is defined ? "is-invalid" }}" id="image" name="image">
+                <label class="custom-file-label" for="image">Choose file</label>
+                <div class="invalid-feedback">
+                    {{ errors.image is defined ? errors.image }}
                 </div>
             </div>
             <button class="btn btn-primary" type="submit">Create Category</button>

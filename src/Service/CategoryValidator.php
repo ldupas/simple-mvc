@@ -4,7 +4,7 @@ namespace App\Service;
 
 class CategoryValidator
 {
-    public function validateCategory(array $category)
+    public function validateCategory(array $category, array $file)
     {
         $errors = [];
         if (!isset($category["name"]) || empty($category["name"])) {
@@ -12,6 +12,9 @@ class CategoryValidator
         }
         if (!isset($category["description"]) || empty($category["description"])) {
             $errors["description"] = "please enter category description";
+        }
+        if (!isset($file["image"]) || empty($file["image"]["name"])) {
+            $errors["image"] = "please add category image";
         }
         return $errors;
     }

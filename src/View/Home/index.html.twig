@@ -6,6 +6,7 @@
             {% for category in categories %}
                 <li class="list-group-item">
                     <a href="/category/detail/{{ category.name }}">{{ category.name }}</a>
+                    <img src="{{ constant('App\\Service\\CategoryImageUploader::PUBLIC_PATH')~"/"~category.image }}">
                 </li>
             {% endfor %}
         </ul>
