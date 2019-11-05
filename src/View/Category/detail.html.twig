@@ -10,7 +10,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ drink.name }}</h5>
                         <p class="card-text">{{ drink.description }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a
+                                href="/favorite/add/{{ drink.id }}"
+                                class="btn btn-primary"
+                        >
+                            <i class="fas fa-heart {{ drink.id in session.favorite ? "font-pink" }}"></i>favorite
+                        </a>
                     </div>
                 </div>
             </div>
