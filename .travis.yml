@@ -14,7 +14,7 @@ script:
     - ./vendor/bin/phpmd src text phpmd.xml
 notifications:
     email:
-        - TRAINER@wildcodeschool.fr
+        - louis.dupas@wildcodeschool.fr
         - STUDENT_MAIL
 branches:
     only:
